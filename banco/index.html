@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulador de Banco</title>
+  <script src="script.js" defer></script>
+  <style>
+    body {
+      margin: 0;
+      background-color: #f2f2f2;
+      color: #222;
+      font-family: Arial, sans-serif;
+      line-height: 1.5;
+    }
+    header {
+      background-color: #006b3f;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      border-bottom: 6px solid #ffdc00;
+    }
+    header h1 { margin: 0; }
+    header p { margin: 8px 0 0; }
+    main {
+      max-width: 650px;
+      margin: 25px auto;
+      padding: 0 15px;
+    }
+    section {
+      background-color: white;
+      border: 1px solid #ddd;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    h2 {
+      color: #006b3f;
+      font-size: 20px;
+      margin-top: 0;
+    }
+    #saldo { font-size: 28px; font-weight: bold; }
+    fieldset { border: 0; margin: 0; padding: 0; }
+    legend { margin-bottom: 15px; font-weight: bold; }
+    label { display: block; margin-bottom: 5px; }
+    input, select {
+      box-sizing: border-box;
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #aaa;
+      border-radius: 3px;
+      font: inherit;
+    }
+    input:disabled { background-color: #eee; }
+    #ajuda-valor, .observacao { color: #555; font-size: 14px; }
+    button {
+      background-color: #006b3f;
+      color: white;
+      border: 0;
+      border-bottom: 3px solid #ffdc00;
+      border-radius: 3px;
+      padding: 12px 20px;
+      font: inherit;
+      cursor: pointer;
+    }
+    button:hover { background-color: #004d2d; }
+    :focus-visible { outline: 3px solid #c5a900; outline-offset: 3px; }
+    #resultado p { margin: 8px 0; }
+    #resultado { white-space: pre-line; }
+    .foto-operacao { max-width: 280px; width: 100%; height: auto; display: block; margin-top: 15px; }
+    .aviso-taxa { background-color: #fff8cc; padding: 12px; border-left: 4px solid #d4b600; font-size: 14px; }
+    footer { text-align: center; padding: 0 15px 20px; font-size: 13px; color: #555; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Simulador de Banco</h1>
+    <p>Trabalho de Desenvolvimento Web</p>
+  </header>
+
+  <main>
+    <section aria-labelledby="titulo-conta">
+      <h2 id="titulo-conta">Minha conta</h2>
+      <p>Saldo disponível:</p>
+      <output id="saldo" aria-live="polite">R$ 1.000,00</output>
+      <p class="observacao">Saldo inicial: R$ 1.000,00.</p>
+    </section>
+
+    <section aria-labelledby="titulo-operacoes">
+      <h2 id="titulo-operacoes">Operações</h2>
+      <p class="aviso-taxa"><strong>Depósitos e saques têm taxa de 200% neste simulador.</strong><br>
+        Depositar R$ 100 diminui o saldo em R$ 100 por causa da taxa de R$ 200.<br>
+        Sacar R$ 100 desconta R$ 300 da conta, incluindo a taxa.
+      </p>
+      <form id="form-operacao" novalidate>
+        <fieldset>
+          <legend>Escolha o que deseja fazer</legend>
+          <label for="operacao">Operação:</label>
+          <select id="operacao" name="operacao">
+            <option value="consultar">Consultar saldo</option>
+            <option value="depositar">Depositar</option>
+            <option value="sacar">Sacar</option>
+            <option value="extrato">Ver extrato</option>
+          </select>
+          <p>
+            <label for="valor">Valor (R$):</label>
+            <input id="valor" name="valor" type="number" min="1" step="1" placeholder="Ex.: 180" aria-describedby="ajuda-valor" disabled>
+          </p>
+          <p id="ajuda-valor">Para consultar o saldo, deixe o valor em branco.</p>
+          <button type="submit">Executar operação</button>
+        </fieldset>
+      </form>
+      <p class="observacao">Notas disponíveis: R$ 100, R$ 50, R$ 20 e R$ 10.<br>O valor do saque deve ser múltiplo de 10.</p>
+    </section>
+
+    <section aria-labelledby="titulo-resultado">
+      <h2 id="titulo-resultado">Resultado</h2>
+      <div id="resultado" role="status" aria-live="polite" aria-atomic="true">
+        <p>Selecione uma operação e clique em Executar operação.</p>
+      </div>
+      <div id="foto" hidden>
+        <img class="foto-operacao" src="https://c.files.bbci.co.uk/2997/production/_127574601_e8675b16-f486-4ce9-b25d-71752923ac1b.jpg" alt="Lula sorrindo e fazendo o gesto de L com a mão" referrerpolicy="no-referrer">
+        <p class="observacao"><a href="https://www.bbc.com/portuguese/brasil-63575268">Foto: Ueslei Marcelino / Reuters — BBC Brasil</a></p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Trabalho de faculdade. Os valores são fictícios.<br>Atualizar a página reinicia o saldo e o extrato.</p>
+  </footer>
+</body>
+</html>
